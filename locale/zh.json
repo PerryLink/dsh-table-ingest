@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "表格摄取",
+    "description": "把 docx/xlsx/csv 转成规则检查器能吃的表格 JSON，带候选表、表头识别、预览与置信度。"
+  }
+}

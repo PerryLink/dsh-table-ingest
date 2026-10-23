@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-table-ingest-hero.png",
+    "kind": "hero",
+    "alt": "dsh-table-ingest terminal output",
+    "caption": "Real dsh-table-ingest checker output."
+  },
+  {
+    "path": "docs/assets/dsh-table-ingest-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-table-ingest terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]
