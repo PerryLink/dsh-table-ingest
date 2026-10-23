@@ -373,6 +373,15 @@ class Reader {
       if (!isSequenceItem(line.text)) break
       this.index += 1
       const rest = line.text === '-' ? '' : line.text.slice(2).trim()
+      // A flow collection as a sequence item (`- {a: 1}`) is one scalar, not the
+      // start of a block mapping: its first `:` belongs to the flow map. Checking
+      // the separator first turned `- {field: x, op: exists}` into a mapping whose
+      // key was the literal text `{field`, and every condition silently lost its
+      // fields.
+      if (rest.startsWith('{') || rest.startsWith('[')) {
+        items.push(parseScalar(rest, line.num))
+        continue
+      }
       const separator = rest === '' ? -1 : findKeySeparator(rest)
       if (separator >= 0) {
         items.push(this.readMapping(indent + 2, { text: rest, line: line.num }))
