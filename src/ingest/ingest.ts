@@ -12,6 +12,8 @@
  */
 
 import { readZipEntries, ZipError } from './zip.ts'
+import { readWorkbook } from './xlsx.ts'
+import { readDelimited } from './csv.ts'
 import { extractDocumentTables, readDocumentPart, flattenNested } from './docx.ts'
 import type { DocxTable } from './docx.ts'
 import {
@@ -308,6 +310,153 @@ function textFallbackOrError(
   }
 }
 
+/* ------------------------------------------------- grid → DocxTable bridge -- */
+
+/** One sheet or delimited file reduced to a caption and a grid. */
+interface GridSource {
+  /** Sheet name or file name, used as the caption candidate. */
+  caption: string
+  grid: string[][]
+}
+
+/**
+ * Wrap a plain grid as the table shape the docx pipeline already understands.
+ *
+ * A spreadsheet or a CSV has no merged cells and no run formatting, so every cell
+ * is one column wide, unshaded and not bold. Going through the same shape means
+ * table ranking, header detection, JSON conversion and preview rendering are
+ * shared rather than duplicated — and any later improvement to those applies to
+ * all three formats at once.
+ *
+ * @param source - caption plus grid.
+ * @param index - position in the candidate list.
+ * @returns a table with no repeated header rows and no nested tables.
+ */
+function gridToTable(source: GridSource, index: number): DocxTable {
+  const cols = source.grid.reduce((max, row) => Math.max(max, row.length), 0)
+  const rows = source.grid.map((row, rowIndex) => {
+    const padded = [...row]
+    while (padded.length < cols) padded.push('')
+    const cells = padded.map((text, col) => ({
+      row: rowIndex,
+      gridCol: col,
+      colSpan: 1,
+      vMerge: null,
+      text,
+      paragraphs: text === '' ? [] : [text],
+      shaded: false,
+      bold: false,
+      nestedTableCount: 0,
+      inherited: false,
+    }))
+    // A row whose only filled cell is the first one is a section label, not data.
+    const filled = cells.filter((cell) => cell.text !== '')
+    const titleRow = cols > 1 && filled.length === 1 && filled[0]?.gridCol === 0
+    return { index: rowIndex, cells, grid: padded, repeatHeader: false, titleRow }
+  })
+  return {
+    index,
+    id: String(index),
+    depth: 0,
+    rows,
+    cols,
+    before: source.caption === '' ? [] : [source.caption],
+    after: [],
+    nested: [],
+    warnings: [],
+  }
+}
+
+/** Turn a workbook into one grid source per visible sheet. */
+function xlsxSources(source: Buffer, filename: string, hint: IngestHint): GridSource[] {
+  const workbook = readWorkbook(source)
+  const sources = workbook.sheets
+    .filter((sheet) => !sheet.hidden)
+    .map((sheet) => ({ caption: sheet.name, grid: sheet.grid }))
+  if (sources.length === 0) throw new IngestError('no-table', filename + ' 中没有可见的工作表')
+  if (typeof hint.tableIndex === 'number' && hint.tableIndex >= sources.length) {
+    throw new IngestError(
+      'bad-hint',
+      '指定了第 ' + (hint.tableIndex + 1) + ' 张表，但 ' + filename + ' 只有 ' + sources.length + ' 张可见工作表',
+    )
+  }
+  return sources
+}
+
+/** Turn a delimited file into a single grid source. */
+function csvSources(source: Buffer, filename: string): GridSource[] {
+  const { grid } = readDelimited(source, filename)
+  return [{ caption: '', grid }]
+}
+
+/**
+ * Run the shared selection and conversion pipeline over non-docx grids.
+ *
+ * @param sources - one per sheet or file.
+ * @param filename - for the emitted target and error messages.
+ * @param hint - caller overrides.
+ * @returns the same result shape the docx path produces.
+ */
+function ingestGrids(sources: GridSource[], filename: string, hint: IngestHint): IngestResult {
+  const tables = sources.map((source, index) => gridToTable(source, index))
+  const ranked = rankTables(tables, hint)
+
+  let chosen: DocxTable | undefined
+  if (typeof hint.tableIndex === 'number') {
+    chosen = tables.find((table) => table.index === hint.tableIndex)
+    if (chosen === undefined) {
+      throw new IngestError('bad-hint', '指定了第 ' + (hint.tableIndex + 1) + ' 张表，但没有这张表', ranked)
+    }
+  } else {
+    const best = ranked[0]
+    const runnerUp = ranked[1]
+    const ambiguous =
+      hint.ambiguous !== 'first' &&
+      best !== undefined &&
+      runnerUp !== undefined &&
+      best.aliasHits === 0 &&
+      best.tableId !== runnerUp.tableId &&
+      best.score - runnerUp.score < 20
+    if (ambiguous) {
+      return {
+        ok: false,
+        candidates: ranked,
+        header: null,
+        preview: '',
+        confidence: 'low',
+        warnings: [],
+        error:
+          '有 ' + ranked.length + ' 张表，前两名分差 ' + (best.score - runnerUp.score) +
+          ' 分且都没有命中期望列名，无法自动判定主表；请用 tableIndex 指定其中一张（候选：' +
+          ranked.map((c) => '#' + c.tableId).join('、') + '）',
+      }
+    }
+    chosen = best === undefined ? undefined : tables.find((table) => table.id === best.tableId)
+  }
+
+  if (chosen === undefined) throw new IngestError('no-table', filename + ' 中找不到可用的表')
+
+  const choice: HeaderChoice = detectHeader(chosen, hint)
+  const table = tableToJson(chosen, hint, filename)
+  if (table.rows.length === 0) {
+    throw new IngestError(
+      'no-data-rows',
+      '第 ' + (chosen.index + 1) + ' 张表识别出 ' + table.columns.length + ' 列，但没有数据行',
+      ranked,
+    )
+  }
+  const candidate = ranked.find((entry) => entry.tableId === chosen?.id)
+  return {
+    ok: true,
+    table,
+    candidates: ranked,
+    header: choice,
+    preview: renderPreview(table, hint.previewRows ?? 5),
+    confidence: confidenceOf(choice, candidate, table.ragged),
+    warnings: table.warnings,
+  }
+}
+
 /* ------------------------------------------------------------------ dispatch -- */
 
 /** Formats the ingest layer can read today. */
@@ -348,9 +497,9 @@ export function ingestToTable(source: Buffer, filename: string, hint: IngestHint
         warnings: ['该格式已是 parseTable 可直接读取的文本，未经过 ingest 转换'],
       }
     case 'xlsx':
-      throw new IngestError('unsupported-format', 'xlsx 读取尚未接入 ingest 层（规格已设计，见设计文档第 3 节）')
+      return ingestGrids(xlsxSources(source, filename, hint), filename, hint)
     case 'csv':
-      throw new IngestError('unsupported-format', 'csv 未接入 ingest 层；首行即表头、无合并单元格，接起来只需 20 行')
+      return ingestGrids(csvSources(source, filename), filename, hint)
     default:
       throw new IngestError('unsupported-format', `不支持的文件格式：${filename}`)
   }

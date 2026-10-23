@@ -13,6 +13,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ingestToTable } from '../src/ingest/ingest.ts'
+import { readWorkbook } from '../src/ingest/xlsx.ts'
 import { buildView } from '../src/view.ts'
 
 const HERE = import.meta.dirname
@@ -115,5 +116,70 @@ describe('view', () => {
     expect(view.ok).toBe(false)
     expect(view.markdown).toContain('用 tableIndex 指定')
     expect(view.markdown).toContain('第 0 张')
+  })
+})
+
+describe('xlsx ingest', () => {
+  it('reads the sheet the workbook says is first, not sheet1.xml', () => {
+    const workbook = readWorkbook(fixture('H-ledger.xlsx'))
+    expect(workbook.sheets.map((s) => s.name)).toEqual(['监理日志台账', '说明'])
+    expect(workbook.date1904).toBe(false)
+  })
+
+  it('resolves a shared string through its index rather than printing the index', () => {
+    const grid = readWorkbook(fixture('H-ledger.xlsx')).sheets[0]?.grid ?? []
+    expect(grid[0]).toEqual(['序号', '日期', '施工部位', '施工内容', '监理情况'])
+  })
+
+  it('reads an inline string, whose value is not in <v>', () => {
+    const grid = readWorkbook(fixture('H-ledger.xlsx')).sheets[0]?.grid ?? []
+    expect(grid[2]?.[3]).toBe('内联字符串直接写在单元格里')
+  })
+
+  it('reads a formula cell through its cached value instead of recalculating', () => {
+    const grid = readWorkbook(fixture('H-ledger.xlsx')).sheets[0]?.grid ?? []
+    expect(grid[3]?.[2]).toBe('3')
+    expect(grid[3]?.[3]).toBe('ab')
+  })
+
+  it('turns a serial number into a date only when the number format says so', () => {
+    const grid = readWorkbook(fixture('H-ledger.xlsx')).sheets[0]?.grid ?? []
+    // Custom format yyyy"年"m"月"d"日" — the quoted literals must not be read as date tokens.
+    expect(grid[4]?.[1]).toBe('2026-10-08')
+    expect(grid[4]?.[2]).toBe('自定义格式 yyyy年m月d日')
+  })
+
+  it('produces table JSON the engine can consume', () => {
+    const result = ingestToTable(fixture('H-ledger.xlsx'), 'H-ledger.xlsx')
+    expect(result.ok).toBe(true)
+    expect(result.table?.columns).toEqual(['序号', '日期', '施工部位', '施工内容', '监理情况'])
+    expect(result.table?.rows.length).toBe(4)
+  })
+
+  it('lets tableIndex pick a later sheet', () => {
+    const result = ingestToTable(fixture('H-ledger.xlsx'), 'H-ledger.xlsx', { tableIndex: 1 })
+    expect(result.ok).toBe(true)
+    expect(result.table?.columns).toEqual(['合计'])
+  })
+})
+
+describe('csv ingest', () => {
+  it('decodes a GB18030 file, whose column names are otherwise replacement characters', () => {
+    const result = ingestToTable(fixture('site-log-gb18030.csv'), 'site-log-gb18030.csv')
+    expect(result.ok).toBe(true)
+    expect(result.table?.columns).toEqual(['序号', '日期', '施工部位', '监理情况'])
+    expect(result.table?.rows[0]?.['施工部位']).toBe('1#楼三层')
+  })
+
+  it('keeps every value a string, so a leading zero survives', () => {
+    const result = ingestToTable(
+      Buffer.from('序号,编号\n1,007\n', 'utf8'),
+      'codes.csv',
+    )
+    expect(result.table?.rows[0]?.['编号']).toBe('007')
+  })
+
+  it('rejects an empty file rather than emitting an empty table', () => {
+    expect(() => ingestToTable(Buffer.from('', 'utf8'), 'empty.csv')).toThrow()
   })
 })
