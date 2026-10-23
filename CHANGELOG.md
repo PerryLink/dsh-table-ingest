@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+- **Library entry `dsh-table-ingest/api`.** The plugin entry registers a tool;
+  this entry exposes the same conversion as plain functions (`ingestToTable`,
+  `readWorkbook`, `readDelimited`, …) so another package can read a document
+  without depending on tool registration or copying the OOXML readers.
+- No behaviour change to the tool itself.
+
 ## 0.1.0
 
 First release.

@@ -1,6 +1,6 @@
 {
   "name": "dsh-table-ingest",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "把 docx/xlsx/csv 转成规则检查器能吃的表格 JSON，带候选表、表头识别、预览与置信度。",
   "type": "module",
   "main": "lib/index.mjs",
@@ -9,6 +9,10 @@
     ".": {
       "types": "./lib/index.d.mts",
       "default": "./lib/index.mjs"
+    },
+    "./api": {
+      "types": "./lib/api.d.mts",
+      "default": "./lib/api.mjs"
     },
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg"
