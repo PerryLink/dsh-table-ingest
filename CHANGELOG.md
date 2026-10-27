@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.1
+
+- **ZIP output budgets.** DOCX/XLSX input is untrusted. A package is now rejected
+  before decompression when it declares more than 256 entries, an entry name over
+  4 KiB, or a compressed entry over 8 MiB. Deflate output is bounded per entry
+  (8 MiB) and cumulatively (32 MiB) via `inflateRawSync({ maxOutputLength })`, so a
+  valid but hostile deflate stream cannot expand without limit.
+- **Central-directory bounds.** Name, extra, comment and local-header lengths are
+  checked against the buffer before reading; a truncated directory or a local
+  offset outside the package raises `ZipError` instead of returning partial data.
+- No change to the conversion output for documents within these limits. The limits
+  are security ceilings, not tunables; callers may pass lower `ZipLimits` values
+  (used by the tests).
+
 ## 0.2.0
 
 - **Library entry `dsh-table-ingest/api`.** The plugin entry registers a tool;
