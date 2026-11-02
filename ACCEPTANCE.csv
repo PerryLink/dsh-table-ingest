@@ -1,0 +1,3 @@
+req_id,metric,threshold,actual,script,evidence_sha256,pass,source,counted
+CHK-TABLE-INGEST-A01,vitest 真实运行,25/25,25,npx vitest run,f962cc5cee7d1494a2f65b7cbcfc75388176491d7784a1f079fe07919ec63cfa,true,public/synthetic,false
+CHK-TABLE-INGEST-A02,失败用例数,0,0,npx vitest run,f962cc5cee7d1494a2f65b7cbcfc75388176491d7784a1f079fe07919ec63cfa,true,public/synthetic,false
