@@ -1,0 +1,20 @@
+{
+  "tool": "table_ingest",
+  "format": "docx",
+  "ok": true,
+  "confidence": "medium",
+  "tableIndex": 0,
+  "headerRow": 1,
+  "columns": [
+    "评审因素",
+    "分值",
+    "评分标准"
+  ],
+  "rowCount": 4,
+  "candidateCount": 1,
+  "warnings": [
+    "与第 2 张表表头相同，已按跨页续表合并",
+    "第 3 行是整行合并的分组行「服务部分」，已跳过（未作为数据行）",
+    "第 2 张表与上一张表表头相同，已合并为一张"
+  ]
+}

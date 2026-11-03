@@ -29,7 +29,10 @@
     "icon.svg",
     "rules",
     "CHANGELOG.md",
-    "SECURITY.md"
+    "SECURITY.md",
+    "samples",
+    "TROUBLESHOOTING.md",
+    "screenshots.json"
   ],
   "scripts": {
     "build": "tsdown",
@@ -46,6 +49,18 @@
     "manifestVersion": 1,
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "demo": {
+      "sample": "samples/quickstart/input/B-tender-multi-table.docx",
+      "prompt": "用自带样例抽一次表，告诉我抽到第几张表、几行几列、置信度多少。",
+      "expect": "samples/quickstart/expected/result.json",
+      "screenshot": "docs/assets/quickstart.png",
+      "reads": [
+        "待抽取的 .docx 文件"
+      ],
+      "writes": [],
+      "network": false,
+      "external": []
     }
   },
   "keywords": [
