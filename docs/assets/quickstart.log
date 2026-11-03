@@ -1,0 +1,4 @@
+$ node samples/quickstart/run.mjs
+table_ingest: docx, ok, 4 rows x 3 columns, confidence medium
+columns: 评审因素 | 分值 | 评分标准
+candidates: 1, header row: 1, warnings: 3
