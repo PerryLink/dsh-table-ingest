@@ -1,6 +1,6 @@
 # dsh-table-ingest — 表格文件转核对格式
 
-## 快速试跑（1 分钟）
+### 快速试跑（1 分钟）
 
 ```bash
 node samples/quickstart/run.mjs --check
