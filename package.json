@@ -62,7 +62,11 @@
       "writes": [],
       "network": false,
       "external": []
-    }
+    },
+    "capabilities": [
+      "tools:register"
+    ],
+    "labels": []
   },
   "keywords": [
     "deepseek-harness",
