@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-dark.svg">
-  <img src="docs/assets/dsh-table-ingest-flow-light.svg" width="100%" alt="dsh-table-ingest पाइपलाइन: docx/xlsx/csv फ़ाइल → फ़ॉर्मैट रीडर → candidates[] उम्मीदवार तालिकाएँ → headerRow हेडर पंक्ति और विश्वास स्तर → tableJson जिसे आगे का parseTable खपत करता है">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-hero-en-dark.webp">
+  <img src="docs/assets/dsh-table-ingest-hero-en-light.webp" width="100%" alt="dsh-table-ingest हीरो: बाईं ओर प्लगइन का नाम, दो मूल्य-पंक्तियाँ और पाँच प्रारूप docx/xlsx/xlsm/csv/tsv; दाईं ओर तीन उम्मीदवार तालिकाओं का ढेर, चुनी गई तालिका 0 तीन स्तंभों और चार पंक्तियों में खुली — Review item, Score, Criteria — confidence medium; पाद में दो समान-शीर्षक तालिकाएँ मर्ज और warnings 3, नीचे tableJson और ok:true">
 </picture>
 
 # dsh-table-ingest
@@ -41,6 +41,11 @@ dsh plugin --profile <name> add dsh-table-ingest
 - **किसके लिए**: उन कर्मचारियों के लिए जिन्हें तालिका-सामग्री नियम-जाँच में डालनी होती है; कमांड लाइन की ज़रूरत नहीं, बातचीत में फ़ाइल सौंप दें।
 - **आप क्या देते हैं**: एक `.docx` / `.xlsx` / `.xlsm` / `.csv` / `.tsv` फ़ाइल का स्थानीय पथ। मूल फ़ाइल कभी नहीं बदली जाती।
 - **यह क्या देता है**: तालिका JSON, विश्वास स्तर के साथ कॉलम नाम और आकार, और आँख से पुष्टि के लिए एक पूर्वावलोकन तालिका; तालिका न मिलने पर उम्मीदवारों की सूची और कारण।
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="dsh-table-ingest की संरचना: दो समान-शीर्षक तालिकाओं वाला docx प्रारूप पाठकों में जाता है; उम्मीदवार स्कोरबोर्ड उन्हें क्रमबद्ध करता है, और चयन-गार्ड तब अंबर ok:false द्वार पर जाता है जब top1−top2 20 से कम हो और कोई expectedColumns हिट न हो, जिससे candidates[] और error लौटते हैं; अन्यथा चुनी गई तालिका पहली छह पंक्तियों में शीर्षक के लिए स्कोर होती है, confidence पाती है, और हरे ok:true द्वार से tableJson, preview और warnings के साथ निकलती है">
+</picture>
 
 ## तीन चरणों में शुरुआत
 
@@ -373,7 +378,7 @@ node samples/quickstart/run.mjs --check   # expected/result.json से तु�
 | `samples/quickstart/` | दोबारा चलाने योग्य नमूना और उसका संदर्भ आउटपुट |
 | `docs/assets/` | चित्र और वास्तविक टर्मिनल आउटपुट |
 
-README के चित्र [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से क्रमादेशित रूप से बनते हैं (शुद्ध SVG, कमांड-टोकन पाठ, हल्का और गहरा दोनों संस्करण) और दोबारा चलाए जा सकते हैं: `python scripts/gen-readme-assets.py`। पुराना एक-संस्करण आरेख और डेमो बाहरी लिंक के लिए `docs/assets/` में बने रहते हैं; README केवल नए जोड़े का संदर्भ देते हैं।
+README के चित्र [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से क्रमादेशित रूप से बनते हैं — hero बैनर Pillow से और flow-v5 संरचना चित्र हाथ से लिखे SVG से — और दोबारा चलाए जा सकते हैं: `python scripts/gen-readme-assets.py`। पुराना एक-संस्करण आरेख और डेमो बाहरी लिंक के लिए `docs/assets/` में बने रहते हैं; README केवल नए hero और flow-v5 को संदर्भित करते हैं, दोनों हल्के और गहरे रूप में।
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `cordis`, `ingest`, `docx`, `xlsx`, `csv`, `table`
 

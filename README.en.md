@@ -1,8 +1,8 @@
 ﻿<div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-dark.svg">
-  <img src="docs/assets/dsh-table-ingest-flow-light.svg" width="100%" alt="dsh-table-ingest pipeline: a docx/xlsx/csv file feeds the format reader, which yields candidates[], then headerRow with a confidence level, then tableJson that a downstream parseTable consumes">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-hero-en-dark.webp">
+  <img src="docs/assets/dsh-table-ingest-hero-en-light.webp" width="100%" alt="dsh-table-ingest hero: on the left the plugin name, two value lines and the five formats docx/xlsx/xlsm/csv/tsv; on the right a deck of three candidate tables, the selected table 0 opened to three columns and four rows — Review item, Score, Criteria — with confidence medium; the footer records two same-header tables merged and warnings 3, and the bottom shows tableJson and ok:true">
 </picture>
 
 # dsh-table-ingest
@@ -41,6 +41,11 @@ It performs no business judgement: it does not decide whether a document is comp
 - **Who it is for**: staff who need to push tabular material into a rule check; no command line required, hand it the file in the conversation.
 - **What you give it**: the local path of one `.docx` / `.xlsx` / `.xlsm` / `.csv` / `.tsv` file. The original is never modified.
 - **What it gives back**: table JSON, column names and size with a confidence level, and a preview table for a human eye; when it cannot find a table, the candidate list and the reason.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="dsh-table-ingest structure: a docx with two same-header tables enters the format readers; the candidate scoreboard ranks them, and the selection guard drops to the amber ok:false door when top1−top2 is under 20 with no expectedColumns alias hit, returning candidates[] and error; otherwise the chosen table is scored for a header over the first six rows, gets a confidence, and exits through the green ok:true door with tableJson, preview and warnings">
+</picture>
 
 ## Three-step setup
 
@@ -373,7 +378,7 @@ Directory layout:
 | `samples/quickstart/` | A re-runnable sample and its gold output |
 | `docs/assets/` | Images and the real terminal output |
 
-The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (pure SVG, command-token wording, light and dark variants) and are safe to re-run: `python scripts/gen-readme-assets.py`. The older single-skin diagram and demo stay in `docs/assets/` for external deep links; the READMEs reference only the new pair.
+The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) — the hero banner with Pillow, the flow-v5 structure diagram as hand-written SVG — and are safe to re-run: `python scripts/gen-readme-assets.py`. The older single-skin diagram and demo stay in `docs/assets/` for external deep links; the READMEs reference only the new hero and flow-v5, each in light and dark.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `cordis`, `ingest`, `docx`, `xlsx`, `csv`, `table`
 

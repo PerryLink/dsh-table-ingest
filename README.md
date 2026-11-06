@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-dark.svg">
-  <img src="docs/assets/dsh-table-ingest-flow-light.svg" width="100%" alt="dsh-table-ingest 管线：docx/xlsx/csv 文件 → 格式读取器 → candidates[] 候选表 → headerRow 表头行与置信度 → tableJson 交给下游 parseTable 消费">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-table-ingest-hero-zh-light.webp" width="100%" alt="dsh-table-ingest 配图：左列是插件名、两行价值句和 docx/xlsx/xlsm/csv/tsv 五种格式；右侧是三张候选表叠成一叠，选中的第 0 张展开为 3 列 4 行——评审因素、分值、评分标准——置信度 medium，页脚注明两张同表头表已合并、warnings 3，底部是 tableJson 与 ok:true">
 </picture>
 
 # dsh-table-ingest
@@ -41,6 +41,11 @@ dsh plugin --profile <name> add dsh-table-ingest
 - **给谁用**：要把表格材料送进规则核对的经办人；不用懂命令行，在对话里把文件交给它即可。
 - **你交什么**：一份 `.docx` / `.xlsx` / `.xlsm` / `.csv` / `.tsv` 文件的本机路径；原件永不修改。
 - **它交什么**：表格 JSON、带置信度的列名与规模、一张给人眼确认的预览表；抽不出表时给出候选清单与原因。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="dsh-table-ingest 结构图：左侧一份 docx 的两张同表头表进入格式读取器；中间候选记分台按分数排序，选表守卫在 top1−top2 小于 20 且没有命中期望列名时直落到 ok:false 出口，返回候选清单与 error；右侧对选定表在前六行判定表头并给出置信度，随后进入 ok:true 出口，交出 tableJson、预览与 warnings">
+</picture>
 
 ## 三步上手
 
@@ -375,7 +380,7 @@ node samples/quickstart/run.mjs --check   # 与 expected/result.json 比对
 | `samples/quickstart/` | 可复跑的样例与金标输出 |
 | `docs/assets/` | 配图与真实终端输出 |
 
-README 配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（纯 SVG、命令 token 文案、深浅双版），可重复执行：`python scripts/gen-readme-assets.py`。旧的单版流程图与演示图保留在 `docs/assets/` 供外链使用，README 只引用新生成的深浅双版。
+README 配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成——hero 横幅用 Pillow 画、flow-v5 结构图用手写 SVG 画——可重复执行：`python scripts/gen-readme-assets.py`。旧的单版流程图与演示图保留在 `docs/assets/` 供外链使用，README 只引用新生成的 hero 与 flow-v5（各含深浅双版）。
 
 Topics：`deepseek-harness`, `dsh`, `dsh-plugin`, `cordis`, `ingest`, `docx`, `xlsx`, `csv`, `table`
 

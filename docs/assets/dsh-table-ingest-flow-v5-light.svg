@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="660" viewBox="0 0 1100 660" role="img" aria-labelledby="figTitle figDesc">
+<title id="figTitle">dsh-table-ingest structure: one file, ranked candidates, a header decision, and two honest exits</title>
+<desc id="figDesc">A docx with two same-header tables is read by the format readers. The centre scoreboard ranks every candidate table; a selection guard sends the ambiguous case straight down to the amber ok:false door, which returns candidates[] and error instead of guessing. A clear winner moves right into header detection over the first six rows, then down into the green ok:true door with tableJson, preview and warnings. Both doors are returns of ingestToTable.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#f9f6fd"/><stop offset="1" stop-color="#e4eaf8"/></linearGradient>
+<filter id="soft" x="-30%" y="-30%" width="170%" height="185%"><feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#1b1735" flood-opacity="0.13"/></filter>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#e7e4f0"/></pattern>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4B67B4"/></marker>
+<marker id="arramber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#b45309"/></marker>
+<marker id="arrfaint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8f94a4"/></marker>
+</defs>
+<rect width="1100" height="660" rx="22" fill="url(#bg)"/>
+<rect width="1100" height="660" rx="22" fill="url(#dots)" opacity=".5"/>
+<text x="44" y="58" fill="#141419" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="29" font-weight="700">dsh-table-ingest</text>
+<text x="44" y="88" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="14.5">5 formats → 3 readers → ranked candidates → header → tableJson · when unsure, it says so</text>
+<text x="1056" y="52" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" text-anchor="end">read-only · offline · no model call</text>
+<text x="1056" y="74" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" text-anchor="end">headerScanRows 6 · previewRows 10</text>
+<line x1="44" y1="102" x2="1056" y2="102" stroke="#e2dff0" stroke-width="1.2"/>
+<text x="36" y="130" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">01</text>
+<text x="70" y="130" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">· INGEST</text>
+<line x1="36" y1="137" x2="296" y2="137" stroke="#eeeaf7" stroke-width="1"/>
+<g filter="url(#soft)"><rect x="36" y="142" width="260" height="182" rx="18" fill="#ffffff" stroke="#e2dff0" stroke-width="1.4"/></g>
+<text x="52" y="168" fill="#141419" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="13" font-weight="700">B-tender-multi-table.docx</text>
+<text x="52" y="186" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">docx · 2 × w:tbl · 1 title paragraph</text>
+<text x="52" y="208" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">table 1</text>
+<rect x="52" y="214" width="228" height="13" rx="2.5" fill="#4B67B4"/>
+<line x1="52" y1="237" x2="280" y2="237" stroke="#e7e4f0" stroke-width="0.8"/>
+<rect x="52" y="237" width="228" height="10" fill="#f4f1fd" opacity="0.55"/>
+<line x1="52" y1="247" x2="280" y2="247" stroke="#e7e4f0" stroke-width="0.8"/>
+<line x1="52" y1="257" x2="280" y2="257" stroke="#e7e4f0" stroke-width="0.8"/>
+<line x1="128.0" y1="214" x2="128.0" y2="257" stroke="#e7e4f0" stroke-width="0.8"/>
+<line x1="204.0" y1="214" x2="204.0" y2="257" stroke="#e7e4f0" stroke-width="0.8"/>
+<rect x="57.0" y="231" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="133.0" y="231" width="31.919999999999998" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="209.0" y="231" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="57.0" y="241" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="133.0" y="241" width="31.919999999999998" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="209.0" y="241" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="57.0" y="251" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="133.0" y="251" width="31.919999999999998" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="209.0" y="251" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<text x="52" y="272" fill="#b45309" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">table 2 · same header → merged</text>
+<rect x="52" y="278" width="228" height="13" rx="2.5" fill="#4B67B4"/>
+<line x1="52" y1="291" x2="280" y2="291" stroke="#e7e4f0" stroke-width="1" stroke-dasharray="3 4"/>
+<line x1="52" y1="301" x2="280" y2="301" stroke="#e7e4f0" stroke-width="0.8"/>
+<line x1="128.0" y1="278" x2="128.0" y2="301" stroke="#e7e4f0" stroke-width="0.8"/>
+<line x1="204.0" y1="278" x2="204.0" y2="301" stroke="#e7e4f0" stroke-width="0.8"/>
+<rect x="57.0" y="295" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="133.0" y="295" width="31.919999999999998" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<rect x="209.0" y="295" width="44.08" height="2.4" rx="1.2" fill="#e7e4f0" opacity="0.95"/>
+<line x1="286" y1="214" x2="286" y2="288" stroke="#b45309" stroke-width="1.1" stroke-dasharray="3 4"/>
+<line x1="280" y1="214" x2="286" y2="214" stroke="#b45309" stroke-width="1.1"/>
+<line x1="280" y1="288" x2="286" y2="288" stroke="#b45309" stroke-width="1.1"/>
+<text x="52" y="314" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">read-only · original never modified</text>
+<g filter="url(#soft)"><rect x="36" y="336" width="260" height="148" rx="18" fill="#ffffff" stroke="#e2dff0" stroke-width="1.4"/></g>
+<text x="52" y="356" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">format readers</text>
+<text x="52" y="374" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">one path · five formats</text>
+<circle cx="55" cy="397" r="2.4" fill="#4B67B4"/>
+<text x="66" y="400" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">docx</text>
+<text x="112" y="400" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">w:tbl · gridSpan · vMerge</text>
+<circle cx="55" cy="423" r="2.4" fill="#4B67B4"/>
+<text x="66" y="426" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">xlsx / xlsm</text>
+<text x="150" y="426" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">sharedStrings · cellXfs</text>
+<circle cx="55" cy="449" r="2.4" fill="#4B67B4"/>
+<text x="66" y="452" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">csv / tsv</text>
+<text x="132" y="452" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">RFC 4180 · GB18030</text>
+<text x="52" y="472" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">values stay strings · zeros kept</text>
+<text x="320" y="130" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">02</text>
+<text x="354" y="130" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">· CANDIDATES</text>
+<line x1="320" y1="137" x2="716" y2="137" stroke="#eeeaf7" stroke-width="1"/>
+<g filter="url(#soft)"><rect x="320" y="142" width="396" height="250" rx="18" fill="#ffffff" stroke="#e2dff0" stroke-width="1.4"/></g>
+<text x="336" y="168" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">candidates[] · rankTables</text>
+<text x="700" y="168" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">ranked by score</text>
+<text x="336" y="186" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">several tables, no guess</text>
+<rect x="332" y="198" width="372" height="54" rx="13" fill="#f4f1fd" stroke="#4B67B4" stroke-width="1.4"/>
+<text x="346" y="220" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12.5" font-weight="700">#0</text>
+<text x="372" y="218" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">table 0 · merged continuation</text>
+<text x="372" y="238" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11.5">4 rows × 3 cols · header row 1</text>
+<rect x="610" y="228" width="80" height="8" rx="4" fill="#e7e4f0"/>
+<rect x="610" y="228" width="65.6" height="8" rx="4" fill="#4B67B4"/>
+<rect x="610" y="206" width="58" height="18" rx="9.0" fill="#eaf7ee" stroke="#16a34a" stroke-width="1"/>
+<text x="639.0" y="218.96" fill="#16a34a" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">selected</text>
+<rect x="332" y="258" width="372" height="54" rx="13" fill="#fbfaff" stroke="#eeeaf7" stroke-width="1"/>
+<text x="346" y="280" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12.5" font-weight="700">#1</text>
+<text x="372" y="278" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">table 1</text>
+<text x="372" y="298" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11.5">6 rows × 4 cols · header row 2</text>
+<rect x="610" y="288" width="80" height="8" rx="4" fill="#e7e4f0"/>
+<rect x="610" y="288" width="36.0" height="8" rx="4" fill="#8f94a4"/>
+<text x="610" y="278" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">score</text>
+<rect x="332" y="318" width="372" height="54" rx="13" fill="#fbfaff" stroke="#eeeaf7" stroke-width="1"/>
+<text x="346" y="340" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12.5" font-weight="700">#2</text>
+<text x="372" y="338" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">table 2</text>
+<text x="372" y="358" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11.5">2 rows × 2 cols · header not found</text>
+<rect x="610" y="348" width="80" height="8" rx="4" fill="#e7e4f0"/>
+<rect x="610" y="348" width="16.0" height="8" rx="4" fill="#8f94a4"/>
+<text x="610" y="338" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">score</text>
+<text x="336" y="384" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">same header across a page break → merged first</text>
+<g filter="url(#soft)"><rect x="320" y="404" width="396" height="64" rx="16" fill="#ffffff" stroke="#e8c9a4" stroke-width="1.4"/></g>
+<circle cx="336" cy="424" r="3.2" fill="#b45309"/>
+<text x="346" y="429" fill="#b45309" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">selection guard</text>
+<text x="336" y="447" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11.5">top1 − top2 &lt; 20 and no expectedColumns hit → no choice</text>
+<text x="336" y="463" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11.5">expectedColumns hit → +120 per column</text>
+<line x1="296" y1="260" x2="316" y2="260" stroke="#4B67B4" stroke-width="2.2" marker-end="url(#arr)"/>
+<line x1="716" y1="260" x2="734" y2="260" stroke="#4B67B4" stroke-width="2.2" marker-end="url(#arr)"/>
+<path d="M518 468 V484" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arramber)"/>
+<text x="526" y="482" fill="#b45309" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">ambiguous</text>
+<text x="736" y="130" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">03</text>
+<text x="770" y="130" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">· HEADER</text>
+<line x1="736" y1="137" x2="1064" y2="137" stroke="#eeeaf7" stroke-width="1"/>
+<g filter="url(#soft)"><rect x="736" y="142" width="328" height="334" rx="18" fill="#ffffff" stroke="#e2dff0" stroke-width="1.4"/></g>
+<text x="752" y="168" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">headerRow · detectHeader</text>
+<text x="1048" y="168" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11" text-anchor="end">first 6 rows</text>
+<text x="752" y="186" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">chosen table · headerRow 1</text>
+<rect x="752" y="196" width="296" height="40" rx="7" fill="#4B67B4"/>
+<rect x="752" y="228" width="296" height="8" fill="#4B67B4"/>
+<text x="827.0" y="222" fill="#ffffff" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">Review item</text>
+<line x1="902" y1="203" x2="902" y2="229" stroke="#ffffff" stroke-width="1"/>
+<text x="930.0" y="222" fill="#ffffff" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">Score</text>
+<line x1="958" y1="203" x2="958" y2="229" stroke="#ffffff" stroke-width="1"/>
+<text x="1003.0" y="222" fill="#ffffff" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">Criteria</text>
+<text x="752" y="252" fill="#8f94a4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11">scan rows 1–6 · headerScanRows 6</text>
+<circle cx="756" cy="272" r="2" fill="#4B67B4"/>
+<text x="764" y="276" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">w:tblHeader</text>
+<text x="886" y="276" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+40</text>
+<circle cx="756" cy="296" r="2" fill="#4B67B4"/>
+<text x="764" y="300" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">row shaded</text>
+<text x="886" y="300" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+25</text>
+<circle cx="756" cy="320" r="2" fill="#4B67B4"/>
+<text x="764" y="324" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">row bold</text>
+<text x="886" y="324" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+15</text>
+<circle cx="756" cy="344" r="2" fill="#4B67B4"/>
+<text x="764" y="348" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">cells ≤20 chars</text>
+<text x="886" y="348" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+10</text>
+<circle cx="912" cy="272" r="2" fill="#4B67B4"/>
+<text x="920" y="276" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">no numeric cell</text>
+<text x="1042" y="276" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+10</text>
+<circle cx="912" cy="296" r="2" fill="#4B67B4"/>
+<text x="920" y="300" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">lexicon hit</text>
+<text x="1042" y="300" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">≤+45</text>
+<circle cx="912" cy="320" r="2" fill="#4B67B4"/>
+<text x="920" y="324" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">next row is data</text>
+<text x="1042" y="324" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+20</text>
+<circle cx="912" cy="344" r="2" fill="#4B67B4"/>
+<text x="920" y="348" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">no blank cells</text>
+<text x="1042" y="348" fill="#4B67B4" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5" text-anchor="end">+5</text>
+<line x1="752" y1="374" x2="1048" y2="374" stroke="#eeeaf7" stroke-width="1"/>
+<text x="752" y="398" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">confidence</text>
+<rect x="828" y="382" width="88" height="26" rx="13.0" fill="#fdf3e9" stroke="#b45309" stroke-width="1"/>
+<text x="872.0" y="399.32" fill="#b45309" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12" font-weight="700" text-anchor="middle">medium</text>
+<text x="752" y="426" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">score ≥60 + alias hit → high</text>
+<text x="752" y="444" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">else medium / low · low = a human should look</text>
+<line x1="900" y1="476" x2="900" y2="490" stroke="#4B67B4" stroke-width="2.2" marker-end="url(#arr)"/>
+<g filter="url(#soft)"><rect x="36" y="492" width="676" height="142" rx="20" fill="#ffffff" stroke="#e8c9a4" stroke-width="1.5"/></g>
+<text x="52" y="520" fill="#b45309" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="14" font-weight="700">when no single table is certain → ok:false</text>
+<text x="52" y="540" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="12">returns the candidates and the reason; never fabricates a table</text>
+<rect x="52" y="552" width="200" height="64" rx="12" fill="#fdf3e9" stroke="#e8c9a4" stroke-width="1"/>
+<text x="66" y="574" fill="#b45309" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">candidates[]</text>
+<text x="66" y="594" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">rows × cols · header row · caption</text>
+<rect x="264" y="552" width="200" height="64" rx="12" fill="#fdf3e9" stroke="#e8c9a4" stroke-width="1"/>
+<text x="278" y="574" fill="#b45309" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">error</text>
+<text x="278" y="594" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">names tableIndex · no table found</text>
+<rect x="476" y="552" width="220" height="64" rx="12" fill="#fdf3e9" stroke="#e8c9a4" stroke-width="1"/>
+<text x="490" y="574" fill="#b45309" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="12" font-weight="700">override</text>
+<text x="490" y="594" fill="#4d5261" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">tableIndex · expectedColumns</text>
+<g filter="url(#soft)"><rect x="736" y="492" width="328" height="142" rx="20" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/></g>
+<text x="752" y="518" fill="#141419" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="13" font-weight="700">tableJson → parseTable</text>
+<rect x="976" y="500" width="72" height="22" rx="11.0" fill="#eaf7ee" stroke="#16a34a" stroke-width="1"/>
+<text x="1012.0" y="514.96" fill="#16a34a" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle">ok: true</text>
+<text x="752" y="544" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5">columns: Review item · Score · Criteria</text>
+<text x="752" y="564" fill="#4d5261" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5">rows: 4 · headerRows: [1] · warnings: 3</text>
+<text x="752" y="584" fill="#141419" font-family="Consolas,'Cascadia Mono','SFMono-Regular',ui-monospace,monospace" font-size="11.5">preview: is this the table you meant?</text>
+<text x="752" y="612" fill="#8f94a4" font-family="'Microsoft YaHei','Segoe UI','Noto Sans CJK SC',sans-serif" font-size="11">confidence medium · 3 warnings</text>
+</svg>

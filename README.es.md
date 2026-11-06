@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-dark.svg">
-  <img src="docs/assets/dsh-table-ingest-flow-light.svg" width="100%" alt="Flujo de dsh-table-ingest: un archivo docx/xlsx/csv entra al lector de formato, que produce candidates[], luego headerRow con un nivel de confianza, y por último tableJson que consume el parseTable posterior">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-hero-en-dark.webp">
+  <img src="docs/assets/dsh-table-ingest-hero-en-light.webp" width="100%" alt="Hero de dsh-table-ingest: a la izquierda el nombre del plugin, dos frases de valor y los cinco formatos docx/xlsx/xlsm/csv/tsv; a la derecha una baraja de tres tablas candidatas, la tabla 0 seleccionada abierta en tres columnas y cuatro filas — Review item, Score, Criteria — con confianza medium; el pie indica dos tablas del mismo encabezado fusionadas y warnings 3, y abajo tableJson y ok:true">
 </picture>
 
 # dsh-table-ingest
@@ -41,6 +41,11 @@ No emite ningún juicio de negocio: no decide si un documento cumple, no atribuy
 - **Para quién**: personal que necesita llevar material tabular a una verificación de reglas; no hace falta la línea de comandos, basta entregar el archivo en la conversación.
 - **Qué entregas**: la ruta local de un archivo `.docx` / `.xlsx` / `.xlsm` / `.csv` / `.tsv`. El original nunca se modifica.
 - **Qué devuelve**: el JSON de tabla, los nombres de columna y el tamaño con un nivel de confianza, y una tabla de vista previa para el ojo humano; cuando no encuentra tabla, la lista de candidatas y el motivo.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-table-ingest-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="Estructura de dsh-table-ingest: un docx con dos tablas del mismo encabezado entra en los lectores de formato; el marcador de candidatas las ordena y la guarda de selección baja a la puerta ámbar ok:false cuando top1−top2 es menor que 20 y no hay acierto de expectedColumns, devolviendo candidates[] y error; si no, la tabla elegida se puntúa para encabezado en las seis primeras filas, obtiene una confianza y sale por la puerta verde ok:true con tableJson, vista previa y warnings">
+</picture>
 
 ## Instalación en tres pasos
 
@@ -373,7 +378,7 @@ Estructura de directorios:
 | `samples/quickstart/` | Muestra reejecutable y su salida de referencia |
 | `docs/assets/` | Imágenes y la salida real de terminal |
 
-Las imágenes del README las genera por programa [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (SVG puro, texto con tokens de comando, variantes clara y oscura) y se puede volver a ejecutar: `python scripts/gen-readme-assets.py`. El diagrama y la demo de una sola versión siguen en `docs/assets/` para enlaces externos; los README solo referencian el par nuevo.
+Las imágenes del README las genera por programa [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) — el banner hero con Pillow y el diagrama de estructura flow-v5 como SVG escrito a mano — y se puede volver a ejecutar: `python scripts/gen-readme-assets.py`. El diagrama y la demo de una sola versión siguen en `docs/assets/` para enlaces externos; los README solo referencian el nuevo hero y el flow-v5, cada uno en claro y oscuro.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `cordis`, `ingest`, `docx`, `xlsx`, `csv`, `table`
 
