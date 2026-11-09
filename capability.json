@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "tier": "L2-document",
+  "input_formats": [
+    "docx",
+    "xlsx",
+    "xlsm",
+    "csv",
+    "tsv"
+  ],
+  "outputs": [
+    "markdown",
+    "json"
+  ],
+  "rules": {
+    "total": 0
+  },
+  "limits": [
+    "基础设施包，不是检查器；PDF/OFD 明确不支持",
+    "表头/多表抽取没有真实文档 P/R"
+  ]
+}
