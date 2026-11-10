@@ -1,6 +1,6 @@
 {
   "name": "dsh-table-ingest",
-  "version": "0.2.2",
+  "version": "0.2.4-reconcile.0",
   "description": "把 docx/xlsx/csv 转成规则检查器能吃的表格 JSON，带候选表、表头识别、预览与置信度。",
   "type": "module",
   "main": "lib/index.mjs",
@@ -21,12 +21,13 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "README-zh.md",
+    "README.en.md",
     "locale/*.json",
     "icon.svg",
     "rules",
     "CHANGELOG.md",
     "SECURITY.md",
+    "docs/assets/*",
     "samples",
     "TROUBLESHOOTING.md",
     "screenshots.json",
@@ -58,7 +59,11 @@
       "writes": [],
       "network": false,
       "external": []
-    }
+    },
+    "capabilities": [
+      "tools:register"
+    ],
+    "labels": []
   },
   "keywords": [
     "deepseek-harness",
