@@ -133,6 +133,10 @@ The chosen table is emitted in the same shape `parseTable` accepts, so a checker
 
 ### Examples
 
+![dsh-table-ingest: real terminal run](docs/assets/dsh-table-ingest-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
 These are the plugin's real entry points; install once, then call one.
 
 **Detailed example** — tool `table_ingest`, target `samples/quickstart/input/B-tender-multi-table.docx` (a scoring table split across two pages); the full text of `samples/quickstart/expected/result.json`:

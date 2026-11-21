@@ -34,6 +34,10 @@ dsh plugin --profile <name> add dsh-table-ingest
 
 ## 它是什么
 
+![dsh-table-ingest 真实终端运行](docs/assets/dsh-table-ingest-demo.gif)
+
+*本仓库一次真实运行的动图回放。*
+
 `dsh-table-ingest` 把 `.docx`、`.xlsx`、`.xlsm`、`.csv`、`.tsv` 文件转成本族规则检查器能吃的表格 JSON。检查器只能读它认得出的表；而职场里的真实文档多是带多张表、合并单元格、表头之上还有标题行的 Word。这个包就是那一步转换——更重要的是，**转不出来时它会说，而不是猜**。
 
 它不做任何业务判断：不判定材料是否合规，不认定责任，也没有自己的规则——`rules/table-ingest.yaml` 是刻意留空的。

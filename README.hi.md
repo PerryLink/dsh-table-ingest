@@ -47,6 +47,11 @@ dsh plugin --profile <name> add dsh-table-ingest
   <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="dsh-table-ingest की संरचना: दो समान-शीर्षक तालिकाओं वाला docx प्रारूप पाठकों में जाता है; उम्मीदवार स्कोरबोर्ड उन्हें क्रमबद्ध करता है, और चयन-गार्ड तब अंबर ok:false द्वार पर जाता है जब top1−top2 20 से कम हो और कोई expectedColumns हिट न हो, जिससे candidates[] और error लौटते हैं; अन्यथा चुनी गई तालिका पहली छह पंक्तियों में शीर्षक के लिए स्कोर होती है, confidence पाती है, और हरे ok:true द्वार से tableJson, preview और warnings के साथ निकलती है">
 </picture>
 
+![dsh-table-ingest का असली टर्मिनल रन](docs/assets/dsh-table-ingest-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## तीन चरणों में शुरुआत
 
 1. **इंस्टॉल करें** (कोई एक चैनल):

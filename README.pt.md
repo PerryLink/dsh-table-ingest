@@ -47,6 +47,11 @@ Não emite julgamento de negócio: não decide se um documento cumpre, não atri
   <img src="docs/assets/dsh-table-ingest-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-table-ingest: um docx com duas tabelas do mesmo cabeçalho entra nos leitores de formato; o placar de candidatas as ordena e a guarda de seleção desce para a porta âmbar ok:false quando top1−top2 é menor que 20 e não há acerto de expectedColumns, devolvendo candidates[] e error; caso contrário, a tabela escolhida é pontuada para cabeçalho nas seis primeiras linhas, recebe uma confiança e sai pela porta verde ok:true com tableJson, prévia e warnings">
 </picture>
 
+![dsh-table-ingest: execução real de terminal](docs/assets/dsh-table-ingest-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Instalação em três passos
 
 1. **Instalar** (escolha um canal):
