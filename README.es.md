@@ -11,6 +11,8 @@
 
 Un conversor estructural para DeepSeek Harness: varias tablas en un mismo Word, celdas combinadas, una fila de título encima del encabezado — todo eso se lee como nombres de columna, filas y un nivel de confianza; y cuando no puede, lo dice en lugar de adivinar.
 
+Última verificación: DeepSeek Harness `dsh-v0.2.5-alpha.1` (2026-11-22).
+
 [Instalar](#instalación-en-tres-pasos) · [Configuración](#configuración) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -50,7 +52,6 @@ No emite ningún juicio de negocio: no decide si un documento cumple, no atribuy
 ![dsh-table-ingest: ejecución real de terminal](docs/assets/dsh-table-ingest-demo.gif)
 
 *Repetición animada de una ejecución real registrada en este repositorio.*
-
 
 ## Instalación en tres pasos
 

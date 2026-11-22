@@ -11,6 +11,8 @@
 
 面向 DeepSeek Harness 的结构转换插件：Word 里的多张表、合并单元格、表头之上的标题行，它一次读成列名、行与置信度；抽不出来时它明说，不猜。
 
+最近一次核验：DeepSeek Harness `dsh-v0.2.5-alpha.1`（2026-11-22）。
+
 [安装](#三步上手) · [配置](#配置) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)

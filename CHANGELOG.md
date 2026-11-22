@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+## [0.2.5] - 2026-11-22
+
+- Compatibility: declare DeepSeek Harness 0.2.3-alpha.1 support (>=0.2.3-0 <0.3.0-0 in engines.dsh and every @deepseek-ai/dsh-* peer range) and refresh README verification stamps.
+
 ## 0.2.1
 
 - **ZIP output budgets.** DOCX/XLSX input is untrusted. A package is now rejected
