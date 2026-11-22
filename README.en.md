@@ -7,6 +7,8 @@
 
 # dsh-table-ingest
 
+Current version `0.2.6`.
+
 **Turn docx, xlsx and csv files into the table JSON a rule checker can consume — and say which table it picked, and whether it is sure.**
 
 A structural converter for DeepSeek Harness: several tables in one Word file, merged cells, a title row above the header — it reads all of that into column names, rows and a confidence level, and when it cannot, it says so instead of guessing.
